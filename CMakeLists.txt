@@ -23,8 +23,8 @@ juce_add_plugin(Tendril
     COPY_PLUGIN_AFTER_BUILD FALSE)
 
 target_sources(Tendril PRIVATE
-    Source/PluginProcessor.cpp
-    Source/PluginEditor.cpp)
+    PluginProcessor.cpp
+    PluginEditor.cpp)
 
 target_compile_definitions(Tendril PUBLIC
     JUCE_WEB_BROWSER=0
