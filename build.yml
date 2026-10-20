@@ -1,0 +1,23 @@
+name: Build Tendril VST3
+on: [push, workflow_dispatch]
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: cmake -B build -A x64 -DCMAKE_BUILD_TYPE=Release
+      - run: cmake --build build --config Release --target Tendril_VST3 --parallel
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Tendril-Windows-VST3
+          path: build/Tendril_artefacts/Release/VST3/Tendril.vst3
+  macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: cmake -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64"
+      - run: cmake --build build --target Tendril_VST3 --parallel
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Tendril-macOS-VST3
+          path: build/Tendril_artefacts/Release/VST3/Tendril.vst3
